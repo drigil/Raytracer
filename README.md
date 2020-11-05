@@ -1,2 +1,2 @@
 # Raytracer
-Raytracer with capabilities to generate spheres and triangles and shade them using Blinn Phong shading. Shadows have been implemented as well. Materials can either be diffuse or dielectric.
+Raytracer with capabilities to generate spheres and triangles and shade them using Blinn Phong shading. Shadows have been implemented as well. Materials can either be diffuse or dielectric. Dielectric materials have the option to follow Beer's Law and Schlick's Approximation. There is also the option to use jittered supersampling to smoothen out edges. Report with screenshots and explaining how each component works is attatched by the name Report.pdf
