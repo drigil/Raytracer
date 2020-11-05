@@ -34,7 +34,7 @@ int main(int, char**)
 
     // Setup raytracer camera. This is used to spawn rays.
     Vector3D camera_position(0, 0, 10);
-    Vector3D camera_target(0, 0, 0); //Looking down -Z axis
+    Vector3D camera_target(0, 0, 0); //Looking down -Z axisjoji
     Vector3D camera_up(0, 1, 0);
     float camera_fovy =  45;
     camera = new Camera(camera_position, camera_target, camera_up, camera_fovy, image_width, image_height);
@@ -59,7 +59,7 @@ int main(int, char**)
     reflectedMaterial->ks = 0.4;
     reflectedMaterial->kd = 0.6;
     reflectedMaterial->n = 128;
-    reflectedMaterial->matType = 1;
+    reflectedMaterial->matType = 4;
 
     Material *dielectricMaterial = new Material(world);
     dielectricMaterial->color = Color(0.1, 0.7, 0.0);
@@ -68,26 +68,31 @@ int main(int, char**)
     dielectricMaterial->kd = 0.6;
     dielectricMaterial->n = 128;
     dielectricMaterial->matType = 2;
-    dielectricMaterial->kr = 0.3;
+    dielectricMaterial->kr = 0.3;   
     dielectricMaterial->kt = 0.7;
-    dielectricMaterial->eta = 0.2;
+    dielectricMaterial->eta = 1.06;
 
 
 
 
 
-    Object *sphere = new Sphere(Vector3D(1, -3, -10), 3, dielectricMaterial, world);
-    Object *sphere2 = new Sphere(Vector3D(1, -2, -25), 7, m, world);
+    Object *sphere = new Sphere(Vector3D(0, 0, 0), 2, m, world);
+    Object *sphere2 = new Sphere(Vector3D(2 , 0, -10), 4, m, world);
+    Object *sphere3 = new Sphere(Vector3D(-3.5 , 0, 2), 0.6, m, world);
+
 
 
     //Adding the triangle we constructed
-    Object *triangle = new Triangle(Vector3D(-40, 5, -60), Vector3D(50, 5, -60), Vector3D(5, 5, 60), m, world);
+    //Object *triangle = new Triangle(Vector3D(-40, 5, -60), Vector3D(50, 5, -60), Vector3D(5, 5, 60), m, world);
+    Object *triangle = new Triangle(Vector3D(-5, -2, 0), Vector3D(5, -2, 3), Vector3D(0, 3, -5), m, world);
+    
     
     world->addObject(sphere);
-    world->addObject(sphere2);
+    //world->addObject(sphere2);
+    //world->addObject(sphere3);
     //world->addObject(triangle);
 
-    LightSource *light = new PointLightSource(world, Vector3D(0, -100, 100), Color(0.1, 0.7, 0.0));
+    LightSource *light = new PointLightSource(world, Vector3D(-50, 100, 100), Color(0.1, 0.7, 0.0));
     world->addLight(light);
 
     engine = new RenderEngine(world, camera);
@@ -131,7 +136,7 @@ int main(int, char**)
         glfwGetWindowSize(window, &win_w, &win_h);
         float image_aspect = (float)image_width/(float)image_height;
         float frac = 0.95; // ensure no horizontal scrolling
-        ImGui::Image((void*)(intptr_t)texImage, ImVec2(frac*win_w, frac*win_w/image_aspect), ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f));
+        ImGui::Image((void*)(intptr_t)texImage, ImVec2(frac*win_w, frac*win_w/image_aspect), ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
 
         ImGui::End();
 
